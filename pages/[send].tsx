@@ -10,6 +10,7 @@ type SendProps = {
 
 const Main = styled.main`
   padding: 2rem;
+  padding-bottom: 8rem;
   margin: auto;
   max-width: 60rem;
   display: grid;

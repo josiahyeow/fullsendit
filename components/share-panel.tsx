@@ -10,7 +10,20 @@ const Container = styled.div`
   bottom: 0;
   width: 100vw;
   padding: 1rem;
-  background-color: #000;
+  background: inherit;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgba(0, 0, 0, 0.5);
+    backdrop-filter: saturate(180%) blur(1.25rem);
+    background: inherit;
+    z-index: -1;
+  }
 `;
 
 const Buttons = styled.div`

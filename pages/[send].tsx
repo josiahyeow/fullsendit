@@ -1,11 +1,19 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import styled from "styled-components";
 import { ImageGallery } from "../components/image-gallery";
 
 type SendProps = {
   sendId: string;
-  isNew: boolean;
 };
+
+const Main = styled.main`
+  padding: 2rem;
+  margin: auto;
+  max-width: 60rem;
+  display: grid;
+  gap: 4rem;
+`;
 
 const Send: NextPage<SendProps> = ({ sendId }) => {
   return (
@@ -16,11 +24,11 @@ const Send: NextPage<SendProps> = ({ sendId }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <Main>
         <div style={{ display: "flex", gap: "4rem" }}>
           <ImageGallery sendId={sendId} />
         </div>
-      </main>
+      </Main>
     </div>
   );
 };

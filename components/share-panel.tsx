@@ -20,13 +20,14 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
+  color: #000;
   background: #b7f499;
   padding: 1rem 2rem;
   border-radius: 5rem;
   border: 0px;
 `;
 
-export const ShareButton = ({ sendId }: { sendId: string }) => {
+export const SharePanel = ({ sendId }: { sendId: string }) => {
   const [shareLink, setShareLink] = useState("");
   const [copyIcon, setCopyIcon] = useState(<Clipboard />);
 

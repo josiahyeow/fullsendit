@@ -4,12 +4,11 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { ImageGallery } from "../../components/image-gallery";
-import { ShareButton } from "../../components/share-button";
+import { SharePanel } from "../../components/share-panel";
 import { supabase } from "../../utils/supabase";
 
 type SendProps = {
   sendId: string;
-  isNew: boolean;
 };
 
 const Main = styled.main`
@@ -44,7 +43,7 @@ const Send: NextPage<SendProps> = ({ sendId }) => {
       </Head>
 
       <Main>
-        <ShareButton sendId={sendId} />
+        <SharePanel sendId={sendId} />
         {isUploading ? (
           <DropZoneContainer>
             <UploadingSpan>Uploading</UploadingSpan>

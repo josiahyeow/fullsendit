@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Check, Clipboard, Share } from "react-feather";
 import styled from "styled-components";
+import { useFiles } from "./files-provider";
+import { UploadButton } from "./upload-button";
 
 const Container = styled.div`
   position: fixed;
@@ -12,22 +14,28 @@ const Container = styled.div`
 `;
 
 const Buttons = styled.div`
-  display: grid;
+  display: flex;
   gap: 1rem;
-  grid-template-columns: auto auto;
+  justify-content: space-around;
   max-width: 60rem;
   margin: auto;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   color: #000;
   background: #b7f499;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   border-radius: 5rem;
   border: 0px;
+  min-width: 10rem;
 `;
 
 export const SharePanel = ({ sendId }: { sendId: string }) => {
+  const { files } = useFiles();
   const [shareLink, setShareLink] = useState("");
   const [copyIcon, setCopyIcon] = useState(<Clipboard />);
 
@@ -56,10 +64,12 @@ export const SharePanel = ({ sendId }: { sendId: string }) => {
   return (
     <Container>
       <Buttons>
-        <Button onClick={onCopy}>{copyIcon}</Button>
-        <Button onClick={onShare}>
-          <Share />
-        </Button>
+        <UploadButton />
+        {!!files.length && (
+          <Button onClick={onShare}>
+            <Share /> Share
+          </Button>
+        )}
       </Buttons>
     </Container>
   );

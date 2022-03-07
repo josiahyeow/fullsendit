@@ -1,6 +1,7 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
+import { FilesProvider } from "../components/files-provider";
 import { ImageGallery } from "../components/image-gallery";
 
 type SendProps = {
@@ -25,9 +26,9 @@ const Send: NextPage<SendProps> = ({ sendId }) => {
       </Head>
 
       <Main>
-        <div style={{ display: "flex", gap: "4rem" }}>
-          <ImageGallery sendId={sendId} />
-        </div>
+        <FilesProvider sendId={sendId}>
+          <ImageGallery />
+        </FilesProvider>
       </Main>
     </div>
   );

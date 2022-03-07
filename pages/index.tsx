@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const Home: NextPage = () => {
   const router = useRouter();
   useEffect(() => {
-    router.replace(`${nanoid()}`);
+    router.replace(`/send/${nanoid()}`);
   });
   return null;
 };

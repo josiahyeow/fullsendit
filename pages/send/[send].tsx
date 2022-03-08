@@ -46,7 +46,7 @@ const Spacer = styled.div`
 
 const Send = () => {
   const { files, loading } = useFiles();
-  if (loading) {
+  if (!files.length && loading) {
     return <Loading />;
   }
   return (

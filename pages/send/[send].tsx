@@ -26,7 +26,7 @@ const SendPage: NextPage<SendProps> = ({ sendId }) => {
   return (
     <div>
       <Head>
-        <title>your non potato quality photos 📸</title>
+        <title>fullsendit</title>
         <meta name="description" content="Send photos in non potato quality" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

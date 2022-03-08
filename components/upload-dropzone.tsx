@@ -27,13 +27,14 @@ export const UploadDropZone = () => {
   return (
     <DropZoneContainer {...getRootProps()}>
       <input {...getInputProps()} />
-      <DropText></DropText>
-      {isDragActive
-        ? "Drop photos here"
-        : isUploading
-        ? "Uploading..."
-        : "Select photos"}
-      {isUploading && <LoadingBar />}
+      <DropText>
+        {isDragActive
+          ? "Drop photos here"
+          : isUploading
+          ? "Uploading..."
+          : "Select photos"}
+        {isUploading && <LoadingBar />}
+      </DropText>
     </DropZoneContainer>
   );
 };

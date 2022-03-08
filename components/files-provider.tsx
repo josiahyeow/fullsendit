@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 
 type FilesValue = {
+  sendId: string;
   files: string[];
   upload: (files: any[]) => void;
   reload: () => void;
@@ -9,6 +10,7 @@ type FilesValue = {
 };
 
 const FileContext = createContext<FilesValue>({
+  sendId: "",
   files: [],
   upload: () => {},
   reload: () => {},
@@ -69,6 +71,7 @@ export const FilesProvider = ({
   };
 
   const value = {
+    sendId,
     files,
     upload: uploadFiles,
     isUploading,

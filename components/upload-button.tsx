@@ -14,7 +14,7 @@ export const UploadButton = () => {
         <Loader />
       ) : (
         <>
-          <Image /> Add photos
+          <Image />
         </>
       )}
     </Button>

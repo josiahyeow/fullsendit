@@ -1,9 +1,11 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import { Zap } from "react-feather";
 import styled from "styled-components";
-import { FilesProvider } from "../../components/files-provider";
+import { FilesProvider, useFiles } from "../../components/files-provider";
 import { ImageGallery } from "../../components/image-gallery";
 import { SharePanel } from "../../components/share-panel";
+import { UploadDropZone } from "../../components/upload-dropzone";
 
 type SendProps = {
   sendId: string;
@@ -14,11 +16,12 @@ const Main = styled.main`
   padding-bottom: 8rem;
   margin: auto;
   max-width: 60rem;
+  height: 100vh;
   display: grid;
   gap: 4rem;
 `;
 
-const Send: NextPage<SendProps> = ({ sendId }) => {
+const SendPage: NextPage<SendProps> = ({ sendId }) => {
   return (
     <div>
       <Head>
@@ -29,11 +32,56 @@ const Send: NextPage<SendProps> = ({ sendId }) => {
 
       <Main>
         <FilesProvider sendId={sendId}>
-          <ImageGallery />
-          <SharePanel sendId={sendId} />
+          <Send />
         </FilesProvider>
       </Main>
     </div>
+  );
+};
+
+const Send = () => {
+  const { files } = useFiles();
+  return (
+    <>
+      {!files.length && <NoPhotos />}
+      {!!files.length && (
+        <>
+          <ImageGallery />
+          <SharePanel />
+        </>
+      )}
+    </>
+  );
+};
+
+const Layout = styled.div`
+  display: grid;
+`;
+
+const H1 = styled.h1`
+  font-family: "Syne", sans-serif;
+`;
+
+const Pitch = styled.p`
+  font-family: "DM Sans", sans-serif;
+`;
+const NoPhotos = () => {
+  return (
+    <Layout>
+      <div>
+        <H1>
+          fullsendit <Zap />
+        </H1>
+        <Pitch>
+          No AirDrop? Easily share full quality photos between iOS, Android or
+          any device.
+        </Pitch>
+        <Pitch>
+          Simply select the photos you want to send and share the link.
+        </Pitch>
+      </div>
+      <UploadDropZone />
+    </Layout>
   );
 };
 
@@ -53,4 +101,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default Send;
+export default SendPage;

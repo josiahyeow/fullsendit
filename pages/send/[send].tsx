@@ -4,6 +4,7 @@ import { Zap } from "react-feather";
 import styled from "styled-components";
 import { FilesProvider, useFiles } from "../../components/files-provider";
 import { ImageGallery } from "../../components/image-gallery";
+import { Loading } from "../../components/loading";
 import { SharePanel } from "../../components/share-panel";
 import { UploadDropZone } from "../../components/upload-dropzone";
 
@@ -16,7 +17,7 @@ const Main = styled.main`
   padding-bottom: 8rem;
   margin: auto;
   max-width: 60rem;
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   gap: 4rem;
 `;
@@ -43,17 +44,10 @@ const Spacer = styled.div`
   padding: 2rem;
 `;
 
-const Loading = styled.div`
-  margin: auto;
-`;
 const Send = () => {
   const { files, loading } = useFiles();
   if (loading) {
-    return (
-      <Loading>
-        <Zap size="4rem" />
-      </Loading>
-    );
+    return <Loading />;
   }
   return (
     <>

@@ -1,8 +1,9 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
-import { FilesProvider } from "../components/files-provider";
+import { FilesProvider, useFiles } from "../components/files-provider";
 import { ImageGallery } from "../components/image-gallery";
+import { Loading } from "../components/loading";
 
 type SendProps = {
   sendId: string;
@@ -13,11 +14,12 @@ const Main = styled.main`
   padding-bottom: 8rem;
   margin: auto;
   max-width: 60rem;
+  min-height: 100vh;
   display: grid;
   gap: 4rem;
 `;
 
-const Send: NextPage<SendProps> = ({ sendId }) => {
+const ViewPage: NextPage<SendProps> = ({ sendId }) => {
   return (
     <div>
       <Head>
@@ -28,11 +30,21 @@ const Send: NextPage<SendProps> = ({ sendId }) => {
 
       <Main>
         <FilesProvider sendId={sendId}>
-          <ImageGallery />
+          <View />
         </FilesProvider>
       </Main>
     </div>
   );
+};
+
+const View = () => {
+  const { loading } = useFiles();
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  return <ImageGallery />;
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
@@ -51,4 +63,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default Send;
+export default ViewPage;

@@ -10,7 +10,7 @@ const Container = styled.div`
   left: 0;
   bottom: 0;
   width: 100vw;
-  padding: 2rem;
+  padding: 1.5rem;
   background: inherit;
 
   &:before {

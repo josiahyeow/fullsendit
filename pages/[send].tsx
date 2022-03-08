@@ -37,6 +37,15 @@ const ViewPage: NextPage<SendProps> = ({ sendId }) => {
   );
 };
 
+const Caption = styled.div`
+  font-size: 12px;
+  text-align: center;
+`;
+
+const Link = styled.a`
+  text-decoration: underline;
+`;
+
 const View = () => {
   const { loading } = useFiles();
 
@@ -44,7 +53,15 @@ const View = () => {
     return <Loading />;
   }
 
-  return <ImageGallery />;
+  return (
+    <>
+      <ImageGallery />
+      <Caption>
+        Brought with 🥔 to you by{" "}
+        <Link href="https://fullsendit.app">fullsendit</Link>
+      </Caption>
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {

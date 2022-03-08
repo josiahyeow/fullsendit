@@ -6,6 +6,7 @@ type FilesValue = {
   files: string[];
   upload: (files: any[]) => void;
   reload: () => void;
+  loading: boolean;
   isUploading: boolean;
 };
 
@@ -14,6 +15,7 @@ const FileContext = createContext<FilesValue>({
   files: [],
   upload: () => {},
   reload: () => {},
+  loading: false,
   isUploading: false,
 });
 
@@ -25,15 +27,19 @@ export const FilesProvider = ({
   children: React.ReactNode;
 }) => {
   const [files, setFiles] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [increment, setIncrement] = useState(0);
 
   useEffect(() => {
     const getFile = async () => {
+      setLoading(true);
       if (!sendId) {
+        setLoading(false);
         return;
       }
       await listFiles();
+      setLoading(false);
     };
     getFile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,6 +79,7 @@ export const FilesProvider = ({
   const value = {
     sendId,
     files,
+    loading,
     upload: uploadFiles,
     isUploading,
     reload: () => setIncrement((prev) => prev + 1),

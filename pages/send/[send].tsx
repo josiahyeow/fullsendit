@@ -42,8 +42,19 @@ const SendPage: NextPage<SendProps> = ({ sendId }) => {
 const Spacer = styled.div`
   padding: 2rem;
 `;
+
+const Loading = styled.div`
+  margin: auto;
+`;
 const Send = () => {
-  const { files } = useFiles();
+  const { files, loading } = useFiles();
+  if (loading) {
+    return (
+      <Loading>
+        <Zap size="4rem" />
+      </Loading>
+    );
+  }
   return (
     <>
       {!files.length && <NoPhotos />}

@@ -39,6 +39,9 @@ const SendPage: NextPage<SendProps> = ({ sendId }) => {
   );
 };
 
+const Spacer = styled.div`
+  padding: 2rem;
+`;
 const Send = () => {
   const { files } = useFiles();
   return (
@@ -47,6 +50,7 @@ const Send = () => {
       {!!files.length && (
         <>
           <ImageGallery />
+          <Spacer />
           <SharePanel />
         </>
       )}

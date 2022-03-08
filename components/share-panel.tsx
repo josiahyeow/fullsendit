@@ -69,8 +69,6 @@ export const SharePanel = () => {
   const onShare = () => {
     shareLink &&
       navigator.share?.({
-        title: "Your fully sent photos",
-        text: "View and download full quality photos shared with you.",
         url: shareLink,
       });
   };

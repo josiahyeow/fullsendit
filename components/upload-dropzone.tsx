@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useFiles } from "./files-provider";
 
 const DropZoneContainer = styled.div`
+  font-family: "DM Sans", sans-serif;
   padding: 2rem;
   border-radius: 1rem;
   border: 2px dashed #eaeaea;

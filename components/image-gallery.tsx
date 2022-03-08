@@ -31,26 +31,21 @@ export const ImageGallery = () => {
   return (
     <Container>
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
-      {files.map(({ file, type }) => {
+      {files.map(({ name, type, data }) => {
+        const src = URL.createObjectURL(data);
         if (type.includes("video")) {
           return (
-            <div key={file.name}>
-              <Video
-                src={URL.createObjectURL(file)}
-                playsInline
-                autoPlay
-                loop
-                muted
-                controls
-              />
+            <div key={name}>
+              <Video src={src} playsInline autoPlay loop muted controls>
+                <source src={src} type={type} />
+              </Video>
             </div>
           );
         }
-
         if (type.includes("image")) {
           return (
-            <div key={file.name}>
-              <Image src={URL.createObjectURL(file)} alt={file.name} />
+            <div key={name}>
+              <Image src={src} alt={name} />
             </div>
           );
         }

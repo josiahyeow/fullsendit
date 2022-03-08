@@ -2,8 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 
 type FileObject = {
-  file: File;
+  name: string;
   type: string;
+  data: Blob;
 };
 
 type FilesValue = {
@@ -68,8 +69,9 @@ export const FilesProvider = ({
           return;
         }
         return {
-          file: new File([blob.data], fileNames[i]),
+          name: fileNames[i],
           type: blob.data.type,
+          data: blob.data,
         };
       })
       .filter(notEmpty);

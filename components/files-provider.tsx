@@ -6,6 +6,7 @@ type FilesValue = {
   files: string[];
   upload: (files: any[]) => void;
   reload: () => void;
+  dispose: () => void;
   loading: boolean;
   isUploading: boolean;
 };
@@ -15,6 +16,7 @@ const FileContext = createContext<FilesValue>({
   files: [],
   upload: () => {},
   reload: () => {},
+  dispose: () => {},
   loading: false,
   isUploading: false,
 });
@@ -76,11 +78,23 @@ export const FilesProvider = ({
     reload();
   };
 
+  const dispose = async () => {
+    const { data } = await supabase.storage.from("sends").list(sendId);
+    if (!data?.length) {
+      return;
+    }
+    const fileNames = data.map((file) => `${sendId}/${file.name}`);
+    await supabase.storage.from("sends").remove(fileNames);
+    setFiles([]);
+    reload();
+  };
+
   const value = {
     sendId,
     files,
     loading,
     upload: uploadFiles,
+    dispose,
     isUploading,
     reload: () => setIncrement((prev) => prev + 1),
   };

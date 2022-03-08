@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Check, Clipboard, Share2 } from "react-feather";
 import styled from "styled-components";
+import { DeleteButton } from "./delete-button";
 import { useFiles } from "./files-provider";
 import { UploadButton } from "./upload-button";
 
@@ -29,12 +30,12 @@ const Container = styled.div`
 const Buttons = styled.div`
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 1fr 3fr;
   max-width: 20rem;
   margin: auto;
 `;
 
-export const Button = styled.button`
+const Button = styled.button`
   font-family: "DM Sans", sans-serif;
   display: flex;
   justify-content: center;
@@ -46,6 +47,10 @@ export const Button = styled.button`
   border-radius: 4rem;
   border: 0px;
   font-size: 18px;
+`;
+
+export const CircleButton = styled(Button)`
+  padding: 1rem;
 `;
 
 export const SharePanel = () => {
@@ -76,6 +81,7 @@ export const SharePanel = () => {
   return (
     <Container>
       <Buttons>
+        <DeleteButton />
         <UploadButton />
         {!!files.length && (
           <Button onClick={onShare}>

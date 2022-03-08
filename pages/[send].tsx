@@ -23,8 +23,8 @@ const ViewPage: NextPage<SendProps> = ({ sendId }) => {
   return (
     <div>
       <Head>
-        <title>Full send it</title>
-        <meta name="description" content="Send photos in full quality" />
+        <title>your non potato quality photos 📸</title>
+        <meta name="description" content="Send photos in non potato quality" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

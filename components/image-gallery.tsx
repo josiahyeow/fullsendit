@@ -15,11 +15,16 @@ const Image = styled.img`
   border-radius: 1rem;
 `;
 
+const NoPhotos = styled.span`
+  font-family: "DM Sans", sans-serif;
+`;
+
 export const ImageGallery = () => {
   const { files } = useFiles();
 
   return (
     <Container>
+      {!files.length && <NoPhotos>No photos here</NoPhotos>}
       {files.map((file) => (
         <div key={file}>
           <Image src={file} alt={"image"} />

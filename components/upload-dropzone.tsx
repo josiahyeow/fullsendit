@@ -10,14 +10,10 @@ const DropZoneContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
-const DropFiles = styled.span`
-  font-weight: bold;
-  padding: 3rem;
-`;
-
-const UploadText = styled.span`
+const DropText = styled.span`
   font-weight: bold;
   padding: 1rem 2rem;
 `;
@@ -31,11 +27,48 @@ export const UploadDropZone = () => {
   return (
     <DropZoneContainer {...getRootProps()}>
       <input {...getInputProps()} />
-      {isDragActive ? (
-        <DropFiles>Drop photos here</DropFiles>
-      ) : (
-        <UploadText>{isUploading ? "Uploading" : "Select photos"}</UploadText>
-      )}
+      <DropText></DropText>
+      {isDragActive
+        ? "Drop photos here"
+        : isUploading
+        ? "Uploading..."
+        : "Select photos"}
+      {isUploading && <LoadingBar />}
     </DropZoneContainer>
   );
 };
+
+const Bar = styled.div`
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: #fff;
+  opacity: 0.1;
+  width: 0px;
+  height: 100%;
+  animation-name: progres;
+  animation-duration: 20s;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+  border-radius: 0.85rem;
+
+  @keyframes progres {
+    0% {
+      width: 0%;
+    }
+    25% {
+      width: 50%;
+    }
+    50% {
+      width: 75%;
+    }
+    75% {
+      width: 85%;
+    }
+    100% {
+      width: 95%;
+    }
+  } ;
+`;
+
+const LoadingBar = () => <Bar />;

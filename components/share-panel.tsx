@@ -78,16 +78,23 @@ export const SharePanel = () => {
       });
   };
 
+  const ShareButton = () => {
+    if (navigator.canShare?.({ url: shareLink })) {
+      return (
+        <Button onClick={onShare}>
+          <Share2 /> Share
+        </Button>
+      );
+    }
+    return <Button onClick={onCopy}>{copyIcon} Copy link</Button>;
+  };
+
   return (
     <Container>
       <Buttons>
         <DeleteButton />
         <UploadButton />
-        {!!files.length && (
-          <Button onClick={onShare}>
-            <Share2 /> Share
-          </Button>
-        )}
+        {!!files.length && <ShareButton />}
       </Buttons>
     </Container>
   );

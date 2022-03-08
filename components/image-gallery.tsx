@@ -1,3 +1,4 @@
+import { detect } from "detect-browser";
 import styled from "styled-components";
 import { useFiles } from "./files-provider";
 
@@ -27,12 +28,21 @@ const NoPhotos = styled.span`
 
 export const ImageGallery = () => {
   const { files } = useFiles();
+  const browser = detect();
 
+  console.log(browser);
   return (
     <Container>
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
       {files.map(({ name, type, data }) => {
         const src = URL.createObjectURL(data);
+        if (browser?.os === "iOS") {
+          return (
+            <div key={name}>
+              <Image src={src} alt={name} />
+            </div>
+          );
+        }
         if (type.includes("video")) {
           return (
             <div key={name}>

@@ -15,6 +15,12 @@ const Image = styled.img`
   border-radius: 1rem;
 `;
 
+const Video = styled.video`
+  max-width: 16rem;
+  max-height: 16rem;
+  border-radius: 1rem;
+`;
+
 const NoPhotos = styled.span`
   font-family: "DM Sans", sans-serif;
 `;
@@ -25,11 +31,31 @@ export const ImageGallery = () => {
   return (
     <Container>
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
-      {files.map((file) => (
-        <div key={file}>
-          <Image src={file} alt={"image"} />
-        </div>
-      ))}
+      {files.map(({ file, type }) => {
+        if (type.includes("video")) {
+          return (
+            <div key={file.name}>
+              <Video
+                src={URL.createObjectURL(file)}
+                playsInline
+                autoPlay
+                loop
+                muted
+                controls
+              />
+            </div>
+          );
+        }
+
+        if (type.includes("image")) {
+          return (
+            <div key={file.name}>
+              <Image src={URL.createObjectURL(file)} alt={file.name} />
+            </div>
+          );
+        }
+        return null;
+      })}
     </Container>
   );
 };

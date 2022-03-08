@@ -1,9 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 
+type FileObject = {
+  file: File;
+  type: string;
+};
+
 type FilesValue = {
   sendId: string;
-  files: string[];
+  files: FileObject[];
   upload: (files: any[]) => void;
   reload: () => void;
   dispose: () => void;
@@ -28,7 +33,7 @@ export const FilesProvider = ({
   sendId: string;
   children: React.ReactNode;
 }) => {
-  const [files, setFiles] = useState<string[]>([]);
+  const [files, setFiles] = useState<FileObject[]>([]);
   const [loading, setLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [increment, setIncrement] = useState(0);
@@ -57,11 +62,18 @@ export const FilesProvider = ({
       supabase.storage.from("sends").download(`${sendId}/${fileName}`)
     );
     const blobs = await Promise.all(fileDownloads);
-    const fileUrls = blobs
-      .map((blob) => blob.data && URL.createObjectURL(blob.data))
+    const _files = blobs
+      .map((blob, i) => {
+        if (!blob.data) {
+          return;
+        }
+        return {
+          file: new File([blob.data], fileNames[i]),
+          type: blob.data.type,
+        };
+      })
       .filter(notEmpty);
-    console.log(fileUrls);
-    setFiles(fileUrls);
+    setFiles(_files);
   };
 
   const reload = () => setIncrement((prev) => prev + 1);

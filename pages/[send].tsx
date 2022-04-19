@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FilesProvider, useFiles } from "../components/files-provider";
 import { ImageGallery } from "../components/image-gallery";
 import { Loading } from "../components/loading";
+import { Notice } from "../components/notice";
 
 type SendProps = {
   sendId: string;
@@ -55,6 +56,9 @@ const View = () => {
 
   return (
     <>
+      <Notice>
+        ⏱ Save these photos now as they will only be up for 24 hours.
+      </Notice>
       <ImageGallery />
       <Caption>
         Brought with 🥔 to you by{" "}

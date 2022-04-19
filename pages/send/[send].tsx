@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FilesProvider, useFiles } from "../../components/files-provider";
 import { ImageGallery } from "../../components/image-gallery";
 import { Loading } from "../../components/loading";
+import { Notice } from "../../components/notice";
 import { SharePanel } from "../../components/share-panel";
 import { UploadDropZone } from "../../components/upload-dropzone";
 
@@ -54,6 +55,7 @@ const Send = () => {
       {!files.length && <NoPhotos />}
       {!!files.length && (
         <>
+          <Notice>⏱ Photos will be deleted after 24 hours.</Notice>
           <ImageGallery />
           <Spacer />
           <SharePanel />

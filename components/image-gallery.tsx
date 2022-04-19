@@ -36,13 +36,13 @@ export const ImageGallery = () => {
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
       {files.map(({ name, type, data }) => {
         const src = URL.createObjectURL(data);
-        // if (browser?.os === "iOS") {
-        //   return (
-        //     <div key={name}>
-        //       <Image src={src} alt={name} />
-        //     </div>
-        //   );
-        // }
+        if (browser?.os === "iOS") {
+          return (
+            <div key={name}>
+              <Image src={src} alt={name} />
+            </div>
+          );
+        }
         if (type.includes("video")) {
           return (
             <div key={name}>

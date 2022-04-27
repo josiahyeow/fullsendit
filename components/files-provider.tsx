@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../utils/supabase";
 
-type FileObject = {
+export type FileObject = {
   name: string;
   type: string;
   data: Blob;

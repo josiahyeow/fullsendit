@@ -1,7 +1,7 @@
 import { detect } from "detect-browser";
 import styled from "styled-components";
 import ReactPlayer from "react-player/lazy";
-import { useFiles } from "./files-provider";
+import { FileObject, useFiles } from "./files-provider";
 import { DownloadCloud } from "react-feather";
 
 const Container = styled.div`
@@ -45,11 +45,23 @@ export const ImageGallery = () => {
   const { files } = useFiles();
   const browser = detect();
 
-  console.log(browser);
+  const shareFile = async (file: FileObject) => {
+    const _file = new File([file.data], file.name);
+    if (navigator?.canShare?.({ files: [_file] })) {
+      try {
+        await navigator?.share({
+          files: [_file],
+          title: file.name,
+        });
+      } catch {}
+    }
+  };
+
   return (
     <Container>
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
-      {files.map(({ name, type, data }) => {
+      {files.map((file) => {
+        const { name, type, data } = file;
         const src = URL.createObjectURL(data);
         if (type.includes("video")) {
           return (
@@ -62,6 +74,12 @@ export const ImageGallery = () => {
                   muted
                   width="auto"
                 />
+                <button
+                  onClick={() => shareFile(file)}
+                  style={{ padding: "1rem" }}
+                >
+                  share
+                </button>
                 <SaveVideo href={src} download={name}>
                   <DownloadCloud />
                 </SaveVideo>

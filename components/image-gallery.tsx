@@ -1,5 +1,6 @@
 import { detect } from "detect-browser";
 import styled from "styled-components";
+import ReactPlayer from "react-player/lazy";
 import { useFiles } from "./files-provider";
 
 const Container = styled.div`
@@ -36,19 +37,13 @@ export const ImageGallery = () => {
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
       {files.map(({ name, type, data }) => {
         const src = URL.createObjectURL(data);
-        if (browser?.os === "iOS") {
-          return (
-            <div key={name}>
-              <Image src={src} alt={name} />
-            </div>
-          );
-        }
         if (type.includes("video")) {
           return (
             <div key={name}>
-              <Video src={src} playsInline autoPlay loop muted controls>
-                <source src={src} type={type} />
-              </Video>
+              <ReactPlayer url={src} controls muted />
+              <a href={src} download>
+                download
+              </a>
             </div>
           );
         }

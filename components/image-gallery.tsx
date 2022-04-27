@@ -62,7 +62,7 @@ export const ImageGallery = () => {
                   muted
                   width="auto"
                 />
-                <SaveVideo href={src} download>
+                <SaveVideo href={src} download={name}>
                   <DownloadCloud />
                 </SaveVideo>
               </Video>

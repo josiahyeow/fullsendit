@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { BigButton } from "./big-button";
 import { useFiles } from "./files-provider";
 import FileSaver from "file-saver";
+import { detect } from "detect-browser";
 
 const Container = styled.div`
   position: fixed;
@@ -43,6 +44,8 @@ export const CircleButton = styled(BigButton)`
 export const SavePanel = () => {
   const { files } = useFiles();
   const [zipping, setZipping] = useState(false);
+  const os = detect();
+  const isMobile = os?.os === "Android OS" || os?.os === "iOS";
 
   const _files = files.map((file) => {
     return new File([file.data], file.name);
@@ -74,7 +77,7 @@ export const SavePanel = () => {
   };
 
   const SaveButton = () => {
-    if (navigator?.canShare?.({ files: _files })) {
+    if (isMobile && navigator?.canShare?.({ files: _files })) {
       return (
         <BigButton onClick={saveFilesUsingNavigator}>
           <DownloadCloud /> Save all

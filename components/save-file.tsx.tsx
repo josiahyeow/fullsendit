@@ -1,6 +1,7 @@
 import { DownloadCloud } from "react-feather";
 import styled from "styled-components";
 import { FileObject } from "./files-provider";
+import { detect } from "detect-browser";
 
 const SaveButton = styled.button`
   color: #000;
@@ -28,6 +29,8 @@ export const SaveFile = ({ file }: { file: FileObject }) => {
   const { name, type, data } = file;
   const src = URL.createObjectURL(data);
   const _file = new File([data], name);
+  const os = detect();
+  const isMobile = os?.os === "Android OS" || os?.os === "iOS";
 
   const saveFileUsingNavigator = async () => {
     try {
@@ -38,7 +41,7 @@ export const SaveFile = ({ file }: { file: FileObject }) => {
     } catch {}
   };
 
-  if (navigator?.canShare?.({ files: [_file] })) {
+  if (isMobile && navigator?.canShare?.({ files: [_file] })) {
     return (
       <SaveButton onClick={saveFileUsingNavigator}>
         <DownloadCloud />

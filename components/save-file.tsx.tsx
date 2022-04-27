@@ -24,7 +24,7 @@ const SaveAnchor = styled.a`
 `;
 
 export const SaveFile = ({ file }: { file: FileObject }) => {
-  const { name, data } = file;
+  const { name, type, data } = file;
   const src = URL.createObjectURL(data);
   const _file = new File([data], name);
 
@@ -32,7 +32,7 @@ export const SaveFile = ({ file }: { file: FileObject }) => {
     try {
       await navigator?.share({
         files: [_file],
-        title: `Tap Save File`,
+        title: `Tap Save ${type.includes("video") ? "Video" : "Photo"}`,
       });
     } catch {}
   };

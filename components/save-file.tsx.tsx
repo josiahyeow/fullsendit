@@ -9,8 +9,6 @@ const SaveButton = styled.button`
   padding: 1rem;
   text-align: center;
   font-weight: bold;
-  margin-right: 1px;
-  margin-left: 0px;
   margin-top: -0.3rem;
   border: none;
 `;

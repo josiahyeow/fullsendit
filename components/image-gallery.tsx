@@ -58,16 +58,14 @@ export const ImageGallery = () => {
   };
 
   const shareFiles = async () => {
-    const _files = files
-      .filter(({ type }) => type.includes("video"))
-      .map((file) => {
-        return new File([file.data], file.name);
-      });
+    const _files = files.map((file) => {
+      return new File([file.data], file.name);
+    });
     if (navigator?.canShare?.({ files: _files })) {
       try {
         await navigator?.share({
           files: _files,
-          title: "videos",
+          title: "Baked potatoes",
         });
       } catch {}
     }
@@ -113,7 +111,7 @@ export const ImageGallery = () => {
         return null;
       })}
       <button onClick={() => shareFiles()} style={{ padding: "1rem" }}>
-        download videos
+        Save all
       </button>
     </Container>
   );

@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import ReactPlayer from "react-player/lazy";
 import { useFiles } from "./files-provider";
-import { DownloadCloud } from "react-feather";
-import { SavePanel } from "./save-panel";
+import { SaveFile } from "./save-file.tsx";
 
 const Container = styled.div`
   display: flex;
@@ -25,16 +24,6 @@ const Video = styled.div`
   video {
     border-radius: 1rem 1rem 0rem 0rem;
   }
-`;
-
-const SaveVideo = styled.a`
-  color: #000;
-  background-color: #fff;
-  border-radius: 0rem 0rem 1rem 1rem;
-  padding: 1rem;
-  text-align: center;
-  font-weight: bold;
-  margin-top: -0.3rem;
 `;
 
 const NoPhotos = styled.span`
@@ -61,9 +50,7 @@ export const ImageGallery = () => {
                   muted
                   width="auto"
                 />
-                <SaveVideo href={src} download={name}>
-                  <DownloadCloud />
-                </SaveVideo>
+                <SaveFile file={file} />
               </Video>
             </div>
           );

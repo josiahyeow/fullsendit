@@ -57,6 +57,22 @@ export const ImageGallery = () => {
     }
   };
 
+  const shareFiles = async () => {
+    const _files = files
+      .filter(({ type }) => type.includes("video"))
+      .map((file) => {
+        return new File([file.data], file.name);
+      });
+    if (navigator?.canShare?.({ files: _files })) {
+      try {
+        await navigator?.share({
+          files: _files,
+          title: "videos",
+        });
+      } catch {}
+    }
+  };
+
   return (
     <Container>
       {!files.length && <NoPhotos>No photos here</NoPhotos>}
@@ -96,6 +112,9 @@ export const ImageGallery = () => {
         }
         return null;
       })}
+      <button onClick={() => shareFiles()} style={{ padding: "1rem" }}>
+        download videos
+      </button>
     </Container>
   );
 };

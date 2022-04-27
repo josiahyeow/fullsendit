@@ -1,7 +1,10 @@
-import { Share2 } from "react-feather";
+import JSZip from "jszip";
+import { useState } from "react";
+import { DownloadCloud } from "react-feather";
 import styled from "styled-components";
 import { BigButton } from "./big-button";
 import { useFiles } from "./files-provider";
+import FileSaver from "file-saver";
 
 const Container = styled.div`
   position: fixed;
@@ -28,8 +31,8 @@ const Container = styled.div`
 const Buttons = styled.div`
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 1fr 3fr;
-  max-width: 20rem;
+  grid-template-columns: 1fr;
+  max-width: 12rem;
   margin: auto;
 `;
 
@@ -39,12 +42,24 @@ export const CircleButton = styled(BigButton)`
 
 export const SavePanel = () => {
   const { files } = useFiles();
+  const [zipping, setZipping] = useState(false);
 
   const _files = files.map((file) => {
     return new File([file.data], file.name);
   });
 
-  const saveFiles = async () => {
+  const zipFiles = async () => {
+    setZipping(true);
+    const zip = new JSZip();
+    files.forEach((file) => {
+      zip.file(file.name, file.data);
+    });
+    const blob = await zip.generateAsync({ type: "blob" });
+    FileSaver.saveAs(URL.createObjectURL(blob), "Baked Potatoes.zip");
+    setZipping(false);
+  };
+
+  const saveFilesUsingNavigator = async () => {
     const _files = files.map((file) => {
       return new File([file.data], file.name);
     });
@@ -52,21 +67,25 @@ export const SavePanel = () => {
       try {
         await navigator?.share({
           files: _files,
-          title: `Save ${_files.length} files`,
+          title: `Tap Save ${_files.length} Items`,
         });
       } catch {}
     }
   };
 
   const SaveButton = () => {
-    if (navigator.canShare?.({ files: _files })) {
+    if (navigator?.canShare?.({ files: _files })) {
       return (
-        <BigButton onClick={saveFiles}>
-          <Share2 /> Save all
+        <BigButton onClick={saveFilesUsingNavigator}>
+          <DownloadCloud /> Save all
         </BigButton>
       );
     }
-    return null;
+    return (
+      <BigButton onClick={zipFiles} disabled={zipping}>
+        <DownloadCloud /> {zipping ? "Saving" : "Save all"}
+      </BigButton>
+    );
   };
 
   return (

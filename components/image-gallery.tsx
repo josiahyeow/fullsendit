@@ -1,8 +1,8 @@
-import { detect } from "detect-browser";
 import styled from "styled-components";
 import ReactPlayer from "react-player/lazy";
-import { FileObject, useFiles } from "./files-provider";
+import { useFiles } from "./files-provider";
 import { DownloadCloud } from "react-feather";
+import { SavePanel } from "./save-panel";
 
 const Container = styled.div`
   display: flex;
@@ -43,33 +43,6 @@ const NoPhotos = styled.span`
 
 export const ImageGallery = () => {
   const { files } = useFiles();
-  const browser = detect();
-
-  const shareFile = async (file: FileObject) => {
-    const _file = new File([file.data], file.name);
-    if (navigator?.canShare?.({ files: [_file] })) {
-      try {
-        await navigator?.share({
-          files: [_file],
-          title: file.name,
-        });
-      } catch {}
-    }
-  };
-
-  const shareFiles = async () => {
-    const _files = files.map((file) => {
-      return new File([file.data], file.name);
-    });
-    if (navigator?.canShare?.({ files: _files })) {
-      try {
-        await navigator?.share({
-          files: _files,
-          title: "Baked potatoes",
-        });
-      } catch {}
-    }
-  };
 
   return (
     <Container>
@@ -88,12 +61,6 @@ export const ImageGallery = () => {
                   muted
                   width="auto"
                 />
-                <button
-                  onClick={() => shareFile(file)}
-                  style={{ padding: "1rem" }}
-                >
-                  share
-                </button>
                 <SaveVideo href={src} download={name}>
                   <DownloadCloud />
                 </SaveVideo>
@@ -110,9 +77,6 @@ export const ImageGallery = () => {
         }
         return null;
       })}
-      <button onClick={() => shareFiles()} style={{ padding: "1rem" }}>
-        Save all
-      </button>
     </Container>
   );
 };

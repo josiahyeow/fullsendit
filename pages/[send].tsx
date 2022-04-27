@@ -5,6 +5,7 @@ import { FilesProvider, useFiles } from "../components/files-provider";
 import { ImageGallery } from "../components/image-gallery";
 import { Loading } from "../components/loading";
 import { Notice } from "../components/notice";
+import { SavePanel } from "../components/save-panel";
 
 type SendProps = {
   sendId: string;
@@ -60,6 +61,7 @@ const View = () => {
         ⏱ Save these photos now as they will only be up for 24 hours.
       </Notice>
       <ImageGallery />
+      <SavePanel />
       <Caption>
         Brought with 🥔 to you by{" "}
         <Link href="https://fullsendit.app">fullsendit</Link>

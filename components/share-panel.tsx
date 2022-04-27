@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Check, Clipboard, Share2 } from "react-feather";
 import styled from "styled-components";
+import { BigButton } from "./big-button";
 import { DeleteButton } from "./delete-button";
 import { useFiles } from "./files-provider";
 import { UploadButton } from "./upload-button";
@@ -35,21 +36,7 @@ const Buttons = styled.div`
   margin: auto;
 `;
 
-const Button = styled.button`
-  font-family: "DM Sans", sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.75rem;
-  color: #000;
-  background: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 4rem;
-  border: 0px;
-  font-size: 18px;
-`;
-
-export const CircleButton = styled(Button)`
+export const CircleButton = styled(BigButton)`
   padding: 1rem;
 `;
 
@@ -81,12 +68,12 @@ export const SharePanel = () => {
   const ShareButton = () => {
     if (navigator.canShare?.({ url: shareLink })) {
       return (
-        <Button onClick={onShare}>
+        <BigButton onClick={onShare}>
           <Share2 /> Share
-        </Button>
+        </BigButton>
       );
     }
-    return <Button onClick={onCopy}>{copyIcon} Copy link</Button>;
+    return <BigButton onClick={onCopy}>{copyIcon} Copy link</BigButton>;
   };
 
   return (

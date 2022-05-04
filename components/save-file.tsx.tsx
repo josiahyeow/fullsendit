@@ -4,8 +4,8 @@ import { FileObject } from "./files-provider";
 import { detect } from "detect-browser";
 
 const SaveButton = styled.button`
-  color: #000;
-  background-color: #fff;
+  color: var(--background);
+  background: var(--primary);
   border-radius: 0rem 0rem 1rem 1rem;
   padding: 1rem;
   text-align: center;
@@ -16,8 +16,8 @@ const SaveButton = styled.button`
 `;
 
 const SaveAnchor = styled.a`
-  color: #000;
-  background-color: #fff;
+  color: var(--background);
+  background: var(--primary);
   border-radius: 0rem 0rem 1rem 1rem;
   padding: 1rem;
   text-align: center;

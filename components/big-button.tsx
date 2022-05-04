@@ -6,8 +6,8 @@ export const BigButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 0.75rem;
-  color: #000;
-  background: #fff;
+  color: var(--primary);
+  background: var(--active-background);
   padding: 1rem 1.5rem;
   border-radius: 4rem;
   border: 0px;

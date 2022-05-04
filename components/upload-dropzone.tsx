@@ -43,7 +43,7 @@ const Bar = styled.div`
   top: 0;
   left: 0;
   position: absolute;
-  background-color: #fff;
+  background-color: var(--primary);
   opacity: 0.1;
   width: 0px;
   height: 100%;

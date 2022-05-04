@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const NoticeContainer = styled.div`
   margin: auto;
-  background-color: #f5f5f5;
-  color: #000;
+  color: var(--primary);
+  background: var(--active-background);
   padding: 2rem;
   border-radius: 1rem;
 `;

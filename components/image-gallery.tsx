@@ -39,8 +39,7 @@ const DeleteButton = styled.button`
   justify-content: center;
   align-items: center;
   border: none;
-  width: 2rem;
-  height: 2rem;
+  padding: 0.25rem;
   border-radius: 2rem;
   color: var(--white);
   background-color: var(--red);
@@ -71,7 +70,7 @@ export const ImageGallery = ({
             <File key={name}>
               {showControls && (
                 <DeleteButton onClick={() => deleteFile(name)}>
-                  <X width="2rem" height="2rem" />
+                  <X />
                 </DeleteButton>
               )}
               <Video>
@@ -92,7 +91,7 @@ export const ImageGallery = ({
             <File key={name}>
               {showControls && (
                 <DeleteButton onClick={() => deleteFile(name)}>
-                  <X width="2rem" height="2rem" />
+                  <X />
                 </DeleteButton>
               )}
               <Image src={src} alt={name} />

@@ -56,7 +56,7 @@ const Send = () => {
       {!!files.length && (
         <>
           <Notice>⏱ Photos will be deleted after 24 hours.</Notice>
-          <ImageGallery />
+          <ImageGallery showControls />
           <Spacer />
           <SharePanel />
         </>

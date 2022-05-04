@@ -53,7 +53,11 @@ const NoPhotos = styled.span`
   font-family: "DM Sans", sans-serif;
 `;
 
-export const ImageGallery = (showControls: boolean = false) => {
+export const ImageGallery = ({
+  showControls = false,
+}: {
+  showControls: boolean;
+}) => {
   const { files, deleteFile } = useFiles();
 
   return (

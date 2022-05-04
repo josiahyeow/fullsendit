@@ -11,14 +11,12 @@ type ThemeManager = {
 const DARK_MODE = {
   primary: "#fff",
   background: "#000",
-  background50: "rgba(0, 0, 0, 0.5)",
   activeBackground: "#181818",
 };
 
 const LIGHT_MODE = {
   primary: "#000",
   background: "#fff",
-  background50: "rgba(244, 244, 241, 0.5)",
   activeBackground: "#f4f4f1",
 };
 
@@ -57,7 +55,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           :root {
             --primary: ${theme.primary};
             --background: ${theme.background};
-            --background50: ${theme.background50};
             --active-background: ${theme.activeBackground};
           }
         `}

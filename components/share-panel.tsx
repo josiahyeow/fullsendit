@@ -21,7 +21,7 @@ const Container = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: inset 0 0 2000px var(--background50);
+    box-shadow: inset 0 0 2000px var(--background);
     backdrop-filter: saturate(180%) blur(1.25rem);
     background: inherit;
     z-index: -1;

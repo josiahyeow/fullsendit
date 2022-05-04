@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Script from "next/script";
+import { useTheme } from "./theme-provider";
 
 const Container = styled.div`
   margin: auto;
@@ -32,9 +34,23 @@ const Potato = styled.div`
   }
 `;
 
-export const Loading = () => (
-  <Container>
-    <Potato>🥔</Potato>
-    <div>baking the potato...</div>
-  </Container>
-);
+export const Loading = () => {
+  const { theme } = useTheme();
+  return (
+    <>
+      <Script src="https://cdn.lordicon.com/lusqsztk.js" />
+      <Container>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `<lord-icon
+              src="https://cdn.lordicon.com/giaigwkd.json"
+              trigger="loop"
+              colors="primary:${theme.primary}"
+              style="width:4rem;height:4rem;">
+          </lord-icon>`,
+          }}
+        />
+      </Container>
+    </>
+  );
+};

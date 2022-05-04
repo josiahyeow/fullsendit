@@ -3,7 +3,7 @@ import { useState } from "react";
 import { DownloadCloud } from "react-feather";
 import styled from "styled-components";
 import { BigButton } from "./big-button";
-import { useFiles } from "./files-provider";
+import { FileObject, useFiles } from "./files-provider";
 import FileSaver from "file-saver";
 import { detect } from "detect-browser";
 
@@ -70,7 +70,7 @@ export const SavePanel = () => {
       try {
         await navigator?.share({
           files: _files,
-          title: `Tap Save ${_files.length} Items`,
+          title: `Tap Save ${_files.length} ${DetermineFileTypes(files)}`,
         });
       } catch {}
     }
@@ -96,4 +96,21 @@ export const SavePanel = () => {
       <Buttons>{!!files.length && <SaveButton />}</Buttons>
     </Container>
   );
+};
+
+const DetermineFileTypes = (files: FileObject[]) => {
+  const hasImages = Object.values(files).some(({ type }) =>
+    type.includes("image")
+  );
+  const hasVideos = Object.values(files).some(({ type }) =>
+    type.includes("video")
+  );
+
+  if (hasImages && !hasVideos) {
+    return "Images";
+  }
+  if (!hasImages && hasVideos) {
+    return "Videos";
+  }
+  return "Items";
 };

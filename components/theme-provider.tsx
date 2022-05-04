@@ -9,7 +9,7 @@ type ThemeManager = {
 };
 
 const COLORS = {
-  red: "#e16259",
+  red: "#ff003c",
   white: "#fff",
 };
 

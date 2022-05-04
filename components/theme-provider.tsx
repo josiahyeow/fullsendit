@@ -8,6 +8,11 @@ type ThemeManager = {
   toggleTheme: () => void;
 };
 
+const COLORS = {
+  red: "#e16259",
+  white: "#fff",
+};
+
 const DARK_MODE = {
   primary: "#fff",
   background: "#000",
@@ -56,6 +61,8 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
             --primary: ${theme.primary};
             --background: ${theme.background};
             --active-background: ${theme.activeBackground};
+            --red: ${COLORS.red};
+            --white: ${COLORS.white};
           }
         `}
       </style>

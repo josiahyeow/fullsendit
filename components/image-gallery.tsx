@@ -2,6 +2,7 @@ import styled from "styled-components";
 import ReactPlayer from "react-player/lazy";
 import { useFiles } from "./files-provider";
 import { SaveFile } from "./save-file.tsx";
+import { X } from "react-feather";
 
 const Container = styled.div`
   display: flex;
@@ -9,6 +10,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2rem;
+`;
+
+const File = styled.div`
+  position: relative;
 `;
 
 const Image = styled.img`
@@ -26,12 +31,30 @@ const Video = styled.div`
   }
 `;
 
+const DeleteButton = styled.button`
+  top: -0.75rem;
+  left: -0.75rem;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  color: var(--white);
+  background-color: var(--red);
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 const NoPhotos = styled.span`
   font-family: "DM Sans", sans-serif;
 `;
 
-export const ImageGallery = () => {
-  const { files } = useFiles();
+export const ImageGallery = (showControls: boolean = false) => {
+  const { files, deleteFile } = useFiles();
 
   return (
     <Container>
@@ -41,7 +64,12 @@ export const ImageGallery = () => {
         const src = URL.createObjectURL(data);
         if (type.includes("video")) {
           return (
-            <div key={name}>
+            <File key={name}>
+              {showControls && (
+                <DeleteButton onClick={() => deleteFile(name)}>
+                  <X />
+                </DeleteButton>
+              )}
               <Video>
                 <ReactPlayer
                   className="video-player"
@@ -52,14 +80,19 @@ export const ImageGallery = () => {
                 />
                 <SaveFile file={file} />
               </Video>
-            </div>
+            </File>
           );
         }
         if (type.includes("image")) {
           return (
-            <div key={name}>
+            <File key={name}>
+              {showControls && (
+                <DeleteButton onClick={() => deleteFile(name)}>
+                  <X />
+                </DeleteButton>
+              )}
               <Image src={src} alt={name} />
-            </div>
+            </File>
           );
         }
         return null;

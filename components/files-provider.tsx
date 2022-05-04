@@ -13,6 +13,7 @@ type FilesValue = {
   upload: (files: any[]) => void;
   reload: () => void;
   dispose: () => void;
+  deleteFile: (fileName: string) => void;
   loading: boolean;
   isUploading: boolean;
 };
@@ -23,6 +24,7 @@ const FileContext = createContext<FilesValue>({
   upload: () => {},
   reload: () => {},
   dispose: () => {},
+  deleteFile: () => {},
   loading: false,
   isUploading: false,
 });
@@ -103,12 +105,19 @@ export const FilesProvider = ({
     reload();
   };
 
+  const deleteFile = async (fileName: string) => {
+    await supabase.storage.from("sends").remove([`${sendId}/${fileName}`]);
+    setFiles((prev) => prev.filter((file) => file.name !== fileName));
+    reload();
+  };
+
   const value = {
     sendId,
     files,
     loading,
     upload: uploadFiles,
     dispose,
+    deleteFile,
     isUploading,
     reload: () => setIncrement((prev) => prev + 1),
   };

@@ -56,7 +56,7 @@ const NoPhotos = styled.span`
 export const ImageGallery = ({
   showControls = false,
 }: {
-  showControls: boolean;
+  showControls?: boolean;
 }) => {
   const { files, deleteFile } = useFiles();
 

@@ -91,7 +91,7 @@ const NoPhotos = () => {
           Simply select the photos you want to send and share the link.
         </Pitch>
         <Pitch>
-          <i>Say goodbye to potato quality photos</i> 👋 🥔
+          <i>Say goodbye to</i> 🥔 <i>quality photos.</i>
         </Pitch>
       </div>
       <UploadDropZone />

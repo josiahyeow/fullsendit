@@ -71,7 +71,7 @@ export const ImageGallery = ({
             <File key={name}>
               {showControls && (
                 <DeleteButton onClick={() => deleteFile(name)}>
-                  <X />
+                  <X width="1rem" height="1rem" />
                 </DeleteButton>
               )}
               <Video>
@@ -92,7 +92,7 @@ export const ImageGallery = ({
             <File key={name}>
               {showControls && (
                 <DeleteButton onClick={() => deleteFile(name)}>
-                  <X />
+                  <X width="1rem" height="1rem" />
                 </DeleteButton>
               )}
               <Image src={src} alt={name} />

@@ -30,7 +30,7 @@ export const SaveFile = ({ file }: { file: FileObject }) => {
   const src = URL.createObjectURL(data);
   const _file = new File([data], name);
   const os = detect();
-  const isMobile = os?.os === "Android OS" || os?.os === "iOS";
+  const isIOS = os?.os === "iOS";
 
   const saveFileUsingNavigator = async () => {
     try {
@@ -41,7 +41,7 @@ export const SaveFile = ({ file }: { file: FileObject }) => {
     } catch {}
   };
 
-  if (isMobile && navigator?.canShare?.({ files: [_file] })) {
+  if (isIOS && navigator?.canShare?.({ files: [_file] })) {
     return (
       <SaveButton onClick={saveFileUsingNavigator}>
         <DownloadCloud />

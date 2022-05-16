@@ -66,6 +66,7 @@ export const SavePanel = () => {
     const _files = files.map((file) => {
       return new File([file.data], file.name, { type: file.type });
     });
+    console.log(_files);
     if (navigator?.canShare?.({ files: _files })) {
       try {
         await navigator?.share({

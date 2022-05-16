@@ -72,11 +72,14 @@ export const SavePanel = () => {
           files: _files,
           title: `Tap Save ${_files.length} ${DetermineFileTypes(files)}`,
         });
-      } catch {}
+      } catch (err: any) {
+        console.error(err);
+      }
     }
   };
 
   const SaveButton = () => {
+    console.log(navigator?.canShare?.({ files: _files }));
     if (isMobile && navigator?.canShare?.({ files: _files })) {
       return (
         <BigButton onClick={saveFilesUsingNavigator}>
